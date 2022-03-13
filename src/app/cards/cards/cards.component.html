@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-4">
+        <button *ngIf="parameters.page != 1" class="btn btn-primary" (click)="changePage( parameters.page - 1)">Prev</button>
+        <button *ngIf="parameters.page * parameters.pageSize < numberOfCards" class="btn btn-primary" (click)="changePage( parameters.page + 1)">Next</button>
+    </div>
+
+    <div class="col-5">
+        <nav aria-label="Page navigation example bg-secondary">
+            <ul class="pagination pointerHand">
+              <li class="page-item" *ngFor="let pageSize of pageSizes" [ngClass]="{'active': parameters.pageSize == pageSize}">
+                <a class="page-link" (click)="changePageSize(pageSize)">{{pageSize}}</a>
+            </li>
+            </ul>
+          </nav>
+    </div>
+</div>
+<div class="row">
+    <div class="col-7">
+        <div class="card" *ngFor="let card of cards">
+            <div class="card-body">
+                <img src="{{card.image}}">
+                <span class="text-primary pointerHand" (click)="showComments(card._id)">{{card.title}}, </span>
+                <span>{{card.subtitle}}</span>
+               
+                <div *ngIf="textLength > text.length">{{card.description}}     
+                    <div *ngIf="textLength > text.length"> 
+                        {{showText}}
+                        <a class="cursorPointer"*ngIf="isShowMore" (click)="toggleShow()">(Show more)</a>
+                        <a class="cursorPointer" *ngIf="!isShowMore" (click)="toggleShow()">(Show less)</a> 
+                    </div>
+                    </div>
+                <br>
+                <button class="btn btn-danger" (click)="setGrade(card.grade - 1, card._id)">-</button>
+                {{card.grade}}
+                <button class="btn btn-success" (click)="setGrade(card.grade + 1, card._id)">+</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="col-4 offset-1" *ngIf="clicked">
+        <app-cardcomments [comments]="comments" [cardId]="cardId"></app-cardcomments>
+    </div>
+    
+</div>

@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col">
+        <form [formGroup]="commentForm" (submit)="onSubmit()">
+            <div class="form-group row">
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Author" formControlName="author">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-10">
+                    <textarea formControlName="text" cols="40" rows="3" placeholder="Comment"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-10">
+                   <button class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body" *ngFor="let comment of comments">
+              <div class="row">
+                  <div class="col-8"><b>{{comment.author}}</b></div>
+                  <div class="col-4">{{comment.date | date: 'dd.MM.yyyy. hh:mm'}}</div>
+              </div>
+              <p>{{comment.text}}</p>
+            </div>
+        </div>
+    </div>
+</div>
